@@ -6,4 +6,6 @@ public class Constantes {
 
     public static final String CONSERVADORA_URL = "https://livrariaconservadora.com.br/index.php?route=product/search&search=";
 
+     public static final String TRACA_URL = "https://www.traca.com.br/search?q=";
+
 }

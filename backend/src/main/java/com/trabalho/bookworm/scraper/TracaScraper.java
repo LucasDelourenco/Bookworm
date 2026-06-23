@@ -62,7 +62,7 @@ public class TracaScraper {
 
             String autor = produto.select(".product-extra-info a").text();
 
-            return new Livro(titulo, preco, "Traça Livraria", link, autor, imagem);
+            return new Livro(titulo, preco, "Livraria Traça", link, autor, imagem);
 
         } catch (Exception e) {
             e.printStackTrace();

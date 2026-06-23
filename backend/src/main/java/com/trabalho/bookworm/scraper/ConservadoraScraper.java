@@ -52,7 +52,7 @@ public class ConservadoraScraper {
 
             String autor = produto.select(".author a").text();
 
-            return new Livro(titulo, preco, "Livrarias Leitura", link, autor, imagem);
+            return new Livro(titulo, preco, "Livraria Conservadora", link, autor, imagem);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -45,7 +45,7 @@ public class LeituraScraper {
 
             String imagem = produto.select(".image a img").attr("src");
 
-            return new Livro(titulo, preco, "Livrarias Leitura", link, null, imagem);
+            return new Livro(titulo, preco, "Livraria Leitura", link, null, imagem);
 
         } catch (Exception e) {
             e.printStackTrace();

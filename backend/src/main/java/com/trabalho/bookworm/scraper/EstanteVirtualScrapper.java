@@ -100,7 +100,7 @@ public class EstanteVirtualScrapper {
 
             String autor = produto.select(".product-item__info .product-item__author").text();
 
-            return new Livro(titulo, preco, "Livrarias Leitura", link, autor, imagem);
+            return new Livro(titulo, preco, "Livraria Estante Virtual", link, autor, imagem);
 
         } catch (Exception e) {
             e.printStackTrace();

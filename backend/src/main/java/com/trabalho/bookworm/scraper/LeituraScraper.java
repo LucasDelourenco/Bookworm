@@ -1,17 +1,16 @@
 package com.trabalho.bookworm.scraper;
 
-import com.trabalho.bookworm.model.Livro;
-import com.trabalho.bookworm.util.Constantes;
-
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.stereotype.Component;
 
-public class LeituraScraper {
+import com.trabalho.bookworm.model.Livro;
+import com.trabalho.bookworm.util.Constantes;
 
+@Component
+public class LeituraScraper implements LivrariaScraper {
+    @Override
     public Livro buscarLivro(String pesquisa) {
 
         try {

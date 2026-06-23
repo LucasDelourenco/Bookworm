@@ -24,11 +24,11 @@ public class ConservadoraScraper implements LivrariaScraper{
             String url = Constantes.CONSERVADORA_URL + pesquisa;
 
             Document doc = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
-                    .header("Accept-Language", "pt-BR,pt;q=0.9")
-                    .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                    .timeout(10000)
-                    .get();
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
+                .header("Accept-Language", "pt-BR,pt;q=0.9")
+                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+                .timeout(10000)
+                .get();
 
             Element produto = doc.selectFirst(".item-product ");
 
@@ -39,7 +39,7 @@ public class ConservadoraScraper implements LivrariaScraper{
             String titulo = produto.select(".name .product-name").text().toLowerCase();
 
             String precoTexto = produto.select(".price .price-new").text()
-                    .replace(",", ".");
+                .replace(",", ".");
 
             double preco = Double.parseDouble(precoTexto);
 

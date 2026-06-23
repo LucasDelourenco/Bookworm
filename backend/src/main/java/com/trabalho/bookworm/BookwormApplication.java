@@ -31,13 +31,13 @@ public class BookwormApplication {
         // ConservadoraScraper cs = new ConservadoraScraper();
         // Livro livro = cs.buscarLivro("codigo limpo");
 
-        // EstanteVirtualScrapper es = new EstanteVirtualScrapper();
-        // Livro livro = es.buscarLivro("pedra filosofal");
+        EstanteVirtualScrapper es = new EstanteVirtualScrapper();
+        Livro livro = es.buscarLivro("pedra filosofal");
         
         // System.out.println(livro);
 
-        TracaScraper tc = new TracaScraper();
-        Livro livro = tc.buscarLivro("vidas secas");
+        // TracaScraper tc = new TracaScraper();
+        // Livro livro = tc.buscarLivro("vidas secas");
         System.out.println(livro);
 
     }

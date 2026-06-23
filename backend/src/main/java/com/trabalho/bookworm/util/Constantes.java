@@ -7,7 +7,7 @@ public class Constantes {
     public static final String CONSERVADORA_URL = "https://livrariaconservadora.com.br/index.php?route=product/search&search=";
 
     public static final String ESTANTEVIRTUAL_PREFIXO_URL = "https://www.estantevirtual.com.br/busca?nsCat=Natural&q=";
-    public static final String ESTANTEVIRTUAL_SUFIXO_URL = "https://www.estantevirtual.com.br/busca?nsCat=Natural&q=";
+    public static final String ESTANTEVIRTUAL_SUFIXO_URL = "&searchField=titulo-autor";
     
     public static final String TRACA_URL = "https://www.traca.com.br/search?q=";
 

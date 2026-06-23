@@ -36,7 +36,7 @@ public class LeituraScraper {
             String titulo = produto.select(".caption h4 a").text();
 
             String precoTexto = produto.select(".caption .price .price-new").text()
-                    .replace("R$", "")
+                    .replace(" R$", "")
                     .replace(",", ".");
 
             double preco = Double.parseDouble(precoTexto);

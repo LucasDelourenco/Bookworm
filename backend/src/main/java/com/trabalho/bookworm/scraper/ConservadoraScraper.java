@@ -1,17 +1,19 @@
 package com.trabalho.bookworm.scraper;
 
-import com.trabalho.bookworm.model.Livro;
-import com.trabalho.bookworm.util.Constantes;
-
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.stereotype.Component;
 
-public class ConservadoraScraper {
+import com.trabalho.bookworm.model.Livro;
+import com.trabalho.bookworm.util.Constantes;
 
+@Component
+public class ConservadoraScraper implements LivrariaScraper{
+    @Override
     public Livro buscarLivro(String pesquisa) {
 
         try {
@@ -52,7 +54,7 @@ public class ConservadoraScraper {
 
             String autor = produto.select(".author a").text();
 
-            return new Livro(titulo, preco, "Livrarias Leitura", link, autor, imagem);
+            return new Livro(titulo, preco, "Livrarias Conservadora", link, autor, imagem);
 
         } catch (Exception e) {
             e.printStackTrace();

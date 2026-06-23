@@ -1,6 +1,5 @@
 package com.trabalho.bookworm;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -39,12 +38,6 @@ public class BookwormApplication {
         // TracaScraper tc = new TracaScraper();
         // Livro livro = tc.buscarLivro("vidas secas");
         System.out.println(livro);
-
+        SpringApplication.run(BookwormApplication.class, args);
     }
-
 }
-
-
-// String pesquisa = "harry potter";
-// pesquisa = pesquisa.replace(" ","%20");
-// System.out.println(pesquisa);

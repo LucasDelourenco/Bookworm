@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.trabalho.bookworm.model.Livro;
+import com.trabalho.bookworm.scraper.AmazonScraper;
 import com.trabalho.bookworm.scraper.ConservadoraScraper;
 import com.trabalho.bookworm.scraper.EstanteVirtualScrapper;
 import com.trabalho.bookworm.scraper.LeituraScraper;
@@ -30,14 +31,18 @@ public class BookwormApplication {
         // ConservadoraScraper cs = new ConservadoraScraper();
         // Livro livro = cs.buscarLivro("codigo limpo");
 
-        EstanteVirtualScrapper es = new EstanteVirtualScrapper();
-        Livro livro = es.buscarLivro("pedra filosofal");
+        // EstanteVirtualScrapper es = new EstanteVirtualScrapper();
+        // Livro livro = es.buscarLivro("pedra filosofal");
         
         // System.out.println(livro);
 
         // TracaScraper tc = new TracaScraper();
-        // Livro livro = tc.buscarLivro("vidas secas");
+        // Livro livro = tc.buscarLivro("sexo");
+
+        AmazonScraper ac = new AmazonScraper();
+        Livro livro = ac.buscarLivro("ela");
         System.out.println(livro);
+        
         SpringApplication.run(BookwormApplication.class, args);
     }
 }

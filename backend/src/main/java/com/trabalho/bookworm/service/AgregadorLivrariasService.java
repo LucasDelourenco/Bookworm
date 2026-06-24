@@ -1,5 +1,7 @@
 package com.trabalho.bookworm.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -8,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.trabalho.bookworm.dto.LivroDto;
 import com.trabalho.bookworm.model.Livro;
 import com.trabalho.bookworm.scraper.LivrariaScraper;
 
@@ -16,31 +19,35 @@ public class AgregadorLivrariasService {
     @Autowired
     private List<LivrariaScraper> scrapers;
 
-    public List<Livro> buscarEmTodasLivrarias(String titulo){
-        //Dispara o scraping de TODAS as livrarias em paralelo
-        List<CompletableFuture<Livro>> futures = scrapers.stream()
-            .map(scraper -> CompletableFuture.supplyAsync(() -> {
-                try {
-                    System.out.println("Disparando busca na: " + scraper.getClass().getSimpleName());
-                    return scraper.buscarLivro(titulo);
-                } catch (Exception e) {
-                    System.err.println("Erro ao buscar na livraria " + scraper.getClass().getSimpleName());
-                    return null; // Se uma falhar, retorna null para não quebrar as outras
-                }
-            }))
-            .collect(Collectors.toList());
+    public List<LivroDto> buscarEmTodasLivrarias(String titulo){
+        List<Livro> livros = new ArrayList<>();
+        for(LivrariaScraper scraper : scrapers){
+            livros.add(scraper.buscarLivro(titulo));
+        }
+        BigDecimal menorPreco = new BigDecimal(-1);
+        List<LivroDto> livrosDto = new ArrayList<>();
+        for(Livro livro : livros){
+            if (livro == null){
+                //System.out.println("Nao Achei");
+                continue;
+            };
+            if(menorPreco.compareTo(new BigDecimal(0))<0 || livro.getPreco().compareTo(menorPreco) < 0){
+                menorPreco = livro.getPreco();
+            }
+            livrosDto.add(new LivroDto(livro.getTitulo(), livro.getPreco(), livro.getLoja()
+                            , livro.getLink(), livro.getAutor(), livro.getImagem(), false));
+        }
 
-        // Cria um ponto de espera. O Java vai aguardar ATÉ QUE TODAS terminem de responder
-        CompletableFuture<Void> livros = CompletableFuture.allOf(
-            futures.toArray(new CompletableFuture[0])
-        );
+        //System.out.println(menorPreco);
+        
+        for(LivroDto livroDto : livrosDto){
+            if(livroDto.getPreco().compareTo(menorPreco) == 0){
+                livroDto.setMelhor(true);
+                break;
+            }
+        }
 
-        // Junta os resultados de volta em uma lista normal de Livros quando tudo acabar
-        return livros.thenApply(v -> 
-            futures.stream()
-                .map(CompletableFuture::join) // Pega o livro retornado de cada tarefa
-                .filter(Objects::nonNull)      // Remove os resultados nulos (livros não encontrados ou erros)
-                .collect(Collectors.toList())
-        ).join(); // Segura a requisição do controller até o agregador ter a lista final
+        return livrosDto;
     }
 }
+

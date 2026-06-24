@@ -1,5 +1,6 @@
 package com.trabalho.bookworm.scraper;
 
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.trabalho.bookworm.model.Livro;
 import com.trabalho.bookworm.util.Constantes;
+import com.trabalho.bookworm.util.Verificador;
 
 @Component
 public class ConservadoraScraper implements LivrariaScraper{
@@ -19,16 +21,16 @@ public class ConservadoraScraper implements LivrariaScraper{
         try {
 
             //pesquisa = pesquisa.replace(" ","%20");
-            pesquisa = URLEncoder.encode(pesquisa, StandardCharsets.UTF_8); //para formatar acentos também
+            String pesquisaTratada = URLEncoder.encode(pesquisa, StandardCharsets.UTF_8); //para formatar acentos também
 
-            String url = Constantes.CONSERVADORA_URL + pesquisa;
+            String url = Constantes.CONSERVADORA_URL + pesquisaTratada;
 
             Document doc = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
-                    .header("Accept-Language", "pt-BR,pt;q=0.9")
-                    .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                    .timeout(10000)
-                    .get();
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
+                .header("Accept-Language", "pt-BR,pt;q=0.9")
+                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+                .timeout(10000)
+                .get();
 
             Element produto = doc.selectFirst(".item-product ");
 
@@ -38,10 +40,16 @@ public class ConservadoraScraper implements LivrariaScraper{
 
             String titulo = produto.select(".name .product-name").text().toLowerCase();
 
-            String precoTexto = produto.select(".price .price-new").text()
-                    .replace(",", ".");
+            if(Verificador.pesquisaEmTitulo(pesquisa, titulo)){
+                return null;
+            }
 
-            double preco = Double.parseDouble(precoTexto);
+            String precoTexto = produto.select(".price .price-new").text()
+                .replace(" ", "")
+                .replace(",", ".");
+
+            //double preco = Double.parseDouble(precoTexto);
+            BigDecimal preco = new BigDecimal(precoTexto);
 
             String link = produto.select(" a").attr("href");
             link = link.replace(" ","%20");
@@ -54,7 +62,8 @@ public class ConservadoraScraper implements LivrariaScraper{
 
             String autor = produto.select(".author a").text();
 
-            return new Livro(titulo, preco, "Livrarias Conservadora", link, autor, imagem);
+
+            return new Livro(titulo, preco, "Livraria Conservadora", link, autor, imagem);
 
         } catch (Exception e) {
             e.printStackTrace();

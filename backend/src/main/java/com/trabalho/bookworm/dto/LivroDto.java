@@ -1,4 +1,4 @@
-package com.trabalho.bookworm.model;
+package com.trabalho.bookworm.dto;
 
 import java.math.BigDecimal;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 //@Entity
 @Setter
 @NoArgsConstructor
-public class Livro {
+public class LivroDto {
 
     private String imagem;
     private String autor;
@@ -18,18 +18,15 @@ public class Livro {
     private BigDecimal preco;
     private String loja;
     private String link;
+    private Boolean melhor;
     
-    public Livro(String titulo, BigDecimal preco, String loja, String link, String autor, String imagem) {
+    public LivroDto(String titulo, BigDecimal preco, String loja, String link, String autor, String imagem, Boolean melhor) {
         this.imagem = imagem;
         this.autor = autor;
         this.titulo = titulo;
         this.preco = preco;
         this.loja = loja;
         this.link = link;
-    }
-
-    @Override
-    public String toString() {
-        return loja + "\n > " + titulo + "\n > R$ " + preco + "\n > " + link + "\n > " + autor + "\n > " + imagem;
+        this.melhor = melhor;
     }
 }

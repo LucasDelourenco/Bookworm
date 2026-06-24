@@ -5,6 +5,7 @@ import useRecuperarLivroPorTitulo from "../hooks/useRecuperarLivrosPorTitulo";
 import { useParams } from "react-router-dom";
 import type { Key } from "react";
 import type { Livro } from "../interfaces/Livro";
+import { isUndefined } from "lodash";
 
 const SearchPage = () => {
   // Puxa o termo buscado na store
@@ -59,7 +60,7 @@ const SearchPage = () => {
           ))}
         </div>
         )}
-        {recuperandoProduto && (
+        {recuperandoProduto && !isUndefined(livro) && (
         <div className="flex items-center justify-center py-10">
           <h2 className="text-3xl font-bold text-indigo-600">
             <span className="inline-flex ml-1">

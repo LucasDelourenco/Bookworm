@@ -61,14 +61,16 @@ const LivroCard: React.FC<LivroCardProps> = ({ livro }) => {
               <span className="text-gray-700">{oferta.loja}</span>
               <div className="flex items-center gap-3">
                 <span className="font-medium text-gray-900">R$ {oferta.preco.toFixed(2).replace('.', ',')}</span>
-                <a 
-                  href={oferta.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-3 py-1 bg-white border border-gray-300 rounded-full hover:bg-gray-100 transition-colors text-xs font-medium text-indigo-600"
-                >
-                  Ir à loja
-                </a>
+                <div className="flex-shrink-0">
+                    <a 
+                      href={oferta.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-3 py-1 bg-indigo-600 border border-gray-300 rounded-full hover:bg-indigo-700 transition-colors text-xs font-bold text-white"
+                    >
+                      Ir à loja
+                    </a>
+                </div>
               </div>
             </div>
           ))}

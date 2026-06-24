@@ -18,6 +18,12 @@ export interface LivroMock {
 const LivroSeachCard: React.FC<LivroMock> = ({ livro }) => {
   return (
     <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+        {livro.isBetter && (
+            <div className="self-start top-5 right-3 bg-indigo-600 text-white text-[12px] font-bold uppercase tracking-wider py-1 px-3 rounded-full shadow-md z-10 flex items-center gap-1">
+                <i className="bi bi-star-fill text-yellow-300"></i>
+                Melhor Preço
+            </div>
+        )}
       <div className="p-5 flex gap-4">
         {/* Capa do Livro */}
         <div className="w-24 h-36 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
@@ -47,16 +53,10 @@ const LivroSeachCard: React.FC<LivroMock> = ({ livro }) => {
           href={livro.link} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="px-3 py-1 bg-white border border-gray-300 rounded-full hover:bg-gray-100 transition-colors text-xs font-medium text-indigo-600"
+          className="px-3 py-1 bg-indigo-600 border border-gray-300 rounded-full hover:bg-indigo-700 transition-colors text-xs font-bold text-white"
         >
           Ir à loja
         </a>
-        {livro.isBetter && (
-            <div className="top-5 right-3 bg-indigo-600 text-white text-[12px] font-bold uppercase tracking-wider py-1 px-3 rounded-full shadow-md z-10 flex items-center gap-1">
-                <i className="bi bi-star-fill text-yellow-300"></i>
-                Melhor Preço
-            </div>
-        )}
       </div>
     </div>
 

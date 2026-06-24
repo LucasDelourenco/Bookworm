@@ -21,6 +21,7 @@ const Pesquisa = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
+      debouncedFunction.flush(); // Isso garante que a função debounced seja executada imediatamente ao aperta enter
       event.preventDefault();
       navigate("/search");
     }

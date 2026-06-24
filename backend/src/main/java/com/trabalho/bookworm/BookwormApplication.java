@@ -38,6 +38,7 @@ public class BookwormApplication {
         // TracaScraper tc = new TracaScraper();
         // Livro livro = tc.buscarLivro("vidas secas");
         System.out.println(livro);
+        
         SpringApplication.run(BookwormApplication.class, args);
     }
 }

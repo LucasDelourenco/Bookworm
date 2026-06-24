@@ -2,10 +2,12 @@ package com.trabalho.bookworm.scraper;
 
 import com.trabalho.bookworm.model.Livro;
 import com.trabalho.bookworm.util.Constantes;
+import com.trabalho.bookworm.util.Verificador;
 
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -13,17 +15,19 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
-public class EstanteVirtualScrapper {
-
+@Component
+public class EstanteVirtualScrapper implements LivrariaScraper {
+    @Override
     public Livro buscarLivro(String pesquisa) {
 
         try {
 
             //pesquisa = pesquisa.replace(" ","%20");
-            pesquisa = URLEncoder.encode(pesquisa, StandardCharsets.UTF_8); //para formatar acentos também
+            String pesquisaTratada = URLEncoder.encode(pesquisa, StandardCharsets.UTF_8); //para formatar acentos também
 
-            String url = Constantes.ESTANTEVIRTUAL_PREFIXO_URL + pesquisa + Constantes.ESTANTEVIRTUAL_SUFIXO_URL;
+            String url = Constantes.ESTANTEVIRTUAL_PREFIXO_URL + pesquisaTratada + Constantes.ESTANTEVIRTUAL_SUFIXO_URL;
 
             Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
@@ -40,8 +44,13 @@ public class EstanteVirtualScrapper {
 
             String titulo = produto.select(".product-item__info .product-item__header h2").text().toLowerCase();
 
+            if(Verificador.pesquisaEmTitulo(pesquisa, titulo)){
+                return null;
+            }
+
             String precoTexto = produto.select(".product-item__info .product-item__buy-area .product-item__text .product-item__sale-price").text()
                 .replace("R$", "")
+                .replace(" ", "")
                 .replace(",", ".");
 
             produto.selectFirst(".product-item__cover img").attributes().forEach(attr ->
@@ -71,7 +80,7 @@ public class EstanteVirtualScrapper {
 
 
             //
-            double preco = Double.parseDouble(precoTexto);
+            BigDecimal preco = new BigDecimal(precoTexto);
 
             String link = produto.select(".product-item__link").attr("abs:href");
 
@@ -100,7 +109,7 @@ public class EstanteVirtualScrapper {
 
             String autor = produto.select(".product-item__info .product-item__author").text();
 
-            return new Livro(titulo, preco, "Livrarias Leitura", link, autor, imagem);
+            return new Livro(titulo, preco, "Livraria Estante Virtual", link, autor, imagem);
 
         } catch (Exception e) {
             e.printStackTrace();

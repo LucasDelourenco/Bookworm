@@ -1,7 +1,6 @@
 // src/components/LivroCard.tsx
 import React from 'react';
 
-// Interface temporária (você pode mesclar com a sua em src/interfaces/Livro)
 export interface Oferta {
   titulo?: string;
   autor?: string;

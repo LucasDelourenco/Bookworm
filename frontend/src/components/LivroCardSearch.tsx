@@ -1,24 +1,30 @@
 // src/components/LivroCard.tsx
 import React from 'react';
+import type { Livro } from '../interfaces/Livro';
 
-interface LivroCardProps {
-  titulo?: string;
-  autor?: string;
-  imagemUrl?: string;
-  loja: string;
-  preco: number;
-  link: string;
-  isBetter: boolean;
+
+// interface LivroCardProps {
+//   titulo?: string;
+//   autor?: string;
+//   imagem?: string;
+//   loja: string;
+//   preco: number;
+//   link: string;
+//   melhor: boolean;
+// }
+
+// export interface LivroMock {
+//     livro: LivroCardProps;
+// }
+
+interface Props {
+  livro: Livro;
 }
 
-export interface LivroMock {
-    livro: LivroCardProps;
-}
-
-const LivroSeachCard: React.FC<LivroMock> = ({ livro }) => {
+const LivroSeachCard = ( {livro}: Props ) => {
   return (
     <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
-        {livro.isBetter && (
+        {livro.melhor && (
             <div className="self-start top-5 right-3 bg-indigo-600 text-white text-[12px] font-bold uppercase tracking-wider py-1 px-3 rounded-full shadow-md z-10 flex items-center gap-1">
                 <i className="bi bi-star-fill text-yellow-300"></i>
                 Melhor Preço
@@ -27,7 +33,7 @@ const LivroSeachCard: React.FC<LivroMock> = ({ livro }) => {
       <div className="p-5 flex gap-4">
         {/* Capa do Livro */}
         <div className="w-24 h-36 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
-          <img src={livro.imagemUrl} alt={livro.titulo} className="w-full h-full object-cover" />
+          <img src={livro.imagem} alt={livro.titulo} className="w-full h-full object-cover" />
         </div>
         
         {/* Informações Principais */}

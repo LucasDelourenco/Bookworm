@@ -53,9 +53,9 @@ public class EstanteVirtualScrapper implements LivrariaScraper {
                 .replace(" ", "")
                 .replace(",", ".");
 
-            produto.selectFirst(".product-item__cover img").attributes().forEach(attr ->
-                System.out.println(attr.getKey() + " = " + attr.getValue())
-            );
+            // produto.selectFirst(".product-item__cover img").attributes().forEach(attr ->
+            //     System.out.println(attr.getKey() + " = " + attr.getValue())
+            // );
 
             // System.out.println(doc.html().contains("https://static.estantevirtual.com.br/book/00/08R-5826-000/08R-5826-000_detail1.jpg?"));
 

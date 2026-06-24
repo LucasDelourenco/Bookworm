@@ -15,7 +15,8 @@ const router = createBrowserRouter([
             {index: true, element: <Navigate to="/home" replace />},
             {path: "home", element: <HomePage />},
             {path: "more-searched", element: <MoreSearchPage />},
-            {path: "search", element: <SearchPage />},
+            {path: "search/:livro", element: <SearchPage />},
+            {path: "search/", element: <SearchPage />}
 
         ]
     }

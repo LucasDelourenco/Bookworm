@@ -15,7 +15,7 @@ import com.trabalho.bookworm.service.AgregadorLivrariasService;
 
 @RestController
 @RequestMapping("api/livros")
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 public class LivroScraperController {
     @Autowired
     private AgregadorLivrariasService agregadorLivrariaService;

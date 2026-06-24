@@ -1,11 +1,11 @@
 export interface Livro {
-  id?: number;
   imagem: string;
   titulo: string;
   autor: string | null;
   preco: number;
   loja: string;
   link: string;
+  melhor: boolean;
 }
 
 

@@ -13,9 +13,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
-public class EstanteVirtualScrapper {
-
+@Component
+public class EstanteVirtualScrapper implements LivrariaScraper {
+    @Override
     public Livro buscarLivro(String pesquisa) {
 
         try {

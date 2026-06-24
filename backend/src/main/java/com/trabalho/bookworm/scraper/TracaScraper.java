@@ -9,9 +9,11 @@ import org.jsoup.nodes.Element;
 
 import com.trabalho.bookworm.model.Livro;
 import com.trabalho.bookworm.util.Constantes;
+import org.springframework.stereotype.Component;
 
-public class TracaScraper {
-
+@Component
+public class TracaScraper implements LivrariaScraper {
+    @Override
     public Livro buscarLivro(String pesquisa) {
 
         try {

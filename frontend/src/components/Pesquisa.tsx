@@ -1,9 +1,11 @@
 import _ from "lodash";
 //import { useMemo, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useLivroStore from "../store/LivroStore";
 
 const Pesquisa = () => {
   const setNome = useLivroStore((s) => s.setNome);
+  const navigate = useNavigate();
   
   const tratarPesquisa = (nome: string) => {
     setNome(nome);
@@ -20,7 +22,7 @@ const Pesquisa = () => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      event.currentTarget.value = "";
+      navigate("/search");
     }
   }
 

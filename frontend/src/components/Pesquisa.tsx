@@ -9,21 +9,27 @@ const Pesquisa = () => {
   
   const tratarPesquisa = (nome: string) => {
     setNome(nome);
+    let valor = "/" + nome
+    if(nome == ""){
+      valor="";
+    }
+    navigate("/search"+valor);
   };
 
   const debouncedFunction = _.debounce((nome: string) => {
     tratarPesquisa(nome);
-  }, 1000);
+  }, 1500);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    debouncedFunction(event.target.value);
-  };
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   debouncedFunction(event.target.value);
+  //   event.preventDefault();
+  // };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      debouncedFunction.flush(); // Isso garante que a função debounced seja executada imediatamente ao aperta enter
-      event.preventDefault();
-      navigate("/search");
+      debouncedFunction(event.currentTarget.value); // Isso garante que a função debounced seja executada imediatamente ao aperta enter
+      // event.preventDefault();
+      // navigate("/search");
     }
   }
 
@@ -35,7 +41,7 @@ const Pesquisa = () => {
           <i className="bi bi-search text-gray-400 group-focus-within:text-indigo-500"></i>
         </div>
         <input
-          onChange={handleChange}
+          //onChange={handleChange}
           onKeyDown={handleKeyDown}
           type="text"
           className="w-full pl-12 pr-4 py-4 text-lg bg-white border border-gray-200 rounded-full shadow-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"

@@ -1,17 +1,20 @@
 package com.trabalho.bookworm.scraper;
 
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.stereotype.Component;
 
 import com.trabalho.bookworm.model.Livro;
 import com.trabalho.bookworm.util.Constantes;
 
-
-public class AmazonScraper {
+@Component
+public class AmazonScraper implements LivrariaScraper{
+    @Override
     public Livro buscarLivro(String pesquisa) {
 
         try {
@@ -41,7 +44,7 @@ public class AmazonScraper {
                 .replace(",", ".");;
 
            
-            double preco = Double.parseDouble(precoTexto);
+            BigDecimal preco = new BigDecimal(precoTexto);
             
             // Busca a tag <a> que contenha o <h2> do titulo dentro dela
             String link = produto.selectFirst("a:has(h2)").attr("href");

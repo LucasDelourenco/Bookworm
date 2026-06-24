@@ -1,5 +1,6 @@
 package com.trabalho.bookworm.scraper;
 
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -9,6 +10,8 @@ import org.jsoup.nodes.Element;
 
 import com.trabalho.bookworm.model.Livro;
 import com.trabalho.bookworm.util.Constantes;
+import com.trabalho.bookworm.util.Verificador;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,9 +22,9 @@ public class TracaScraper implements LivrariaScraper {
         try {
 
             //pesquisa = pesquisa.replace(" ","%20");
-            pesquisa = URLEncoder.encode(pesquisa, StandardCharsets.UTF_8); //para formatar acentos também
+            String pesquisaTratada = URLEncoder.encode(pesquisa, StandardCharsets.UTF_8); //para formatar acentos também
 
-            String url = Constantes.TRACA_URL + pesquisa;
+            String url = Constantes.TRACA_URL + pesquisaTratada;
 
             Document doc = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
@@ -38,6 +41,10 @@ public class TracaScraper implements LivrariaScraper {
 
             String titulo = produto.selectFirst(".card__heading a").text().toLowerCase();
 
+            if(Verificador.pesquisaEmTitulo(pesquisa, titulo)){
+                return null;
+            }
+
             String textoPrecoBruto = produto.select(".price").text();
 
             // Divide a string no R$ 
@@ -48,8 +55,9 @@ public class TracaScraper implements LivrariaScraper {
             // Limpa caracteres e converte para double
             String precoTexto = ultimoPreco
                 .replaceAll("[^0-9,]", "")
+                .replace(" ", "")
                 .replace(",", ".");
-            double preco = Double.parseDouble(precoTexto);
+            BigDecimal preco = new BigDecimal(precoTexto);
             
             String link = produto.select(".card__heading a").attr("href");
             if (link.startsWith("/")) {

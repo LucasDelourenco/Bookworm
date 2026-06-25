@@ -23,7 +23,7 @@ interface Props {
 
 const LivroSeachCard = ( {livro}: Props ) => {
   return (
-    <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+    <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:scale-101 hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
         {livro.melhor && (
             <div className="self-start top-5 right-3 bg-indigo-600 text-white text-[12px] font-bold uppercase tracking-wider py-1 px-3 rounded-full shadow-md z-10 flex items-center gap-1">
                 <i className="bi bi-star-fill text-yellow-300"></i>

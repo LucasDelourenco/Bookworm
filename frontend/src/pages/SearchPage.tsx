@@ -2,7 +2,7 @@ import Pesquisa from "../components/Pesquisa";
 import LivroSearchCard from "../components/LivroCardSearch";
 import useLivroStore from "../store/LivroStore";
 import useRecuperarLivroPorTitulo from "../hooks/useRecuperarLivrosPorTitulo";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useState, type Key } from "react";
 import type { Livro } from "../interfaces/Livro";
 import { isUndefined } from "lodash";
@@ -10,7 +10,7 @@ import { isUndefined } from "lodash";
 const SearchPage = () => {
   // Puxa o termo buscado na store
   const termoBuscado = useLivroStore((s) => s.nome);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [ordem, setOrdem] = useState<"menor" | "maior">("menor");
   //Pega o "q" da URL
   const livro = searchParams.get("q") || "";
@@ -53,25 +53,28 @@ const SearchPage = () => {
         <Pesquisa />
 
         {termoBuscado && (
-          <div className="mt-8 mb-4 border-b border-gray-200 pb-2">
-            <h2 className="text-xl font-semibold text-slate-800">
-              Resultados para:{" "}
-              <span className="text-indigo-600">"{termoBuscado}"</span>
-            </h2>
-            <div className="mt-5 flex items-center gap-2">
-              <label className="text-sm font-medium text-gray-600">
-                Ordenar por:
-              </label>
-              <select
-                value={ordem}
-                onChange={(e) => setOrdem(e.target.value as "menor" | "maior")}
-                className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none"
-              >
-                <option value="menor">Menor Preço</option>
-                <option value="maior">Maior Preço</option>
-              </select>
+            <div className="mt-8 mb-4 border-b border-gray-200 pb-4">
+              <h2 className="text-xl font-semibold text-black">
+                Resultados para:{" "}
+                <span className="text-purple-600">"{termoBuscado}"</span>
+              </h2>
+
+              <div className="mt-5 flex items-center gap-3">
+                <label className="text-sm font-medium text-gray-700">
+                  Ordenar por:
+                </label>
+                <div className="relative">
+                  <select
+                    value={ordem}
+                    onChange={(e) => setOrdem(e.target.value as "menor" | "maior")}
+                    className="appearance-none rounded-full border-2 border-purple-200 bg-white px-5 py-2 pr-10 text-sm font-semibold text-black shadow-sm hover:border-purple-400 focus:border-purple-600 focus:outline-none focus:ring-4 focus:ring-purple-100 cursor-pointer"
+                  >
+                    <option value="menor">Menor Preço</option>
+                    <option value="maior">Maior Preço</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
         )}
 
         {!recuperandoProduto && (
@@ -88,12 +91,8 @@ const SearchPage = () => {
             <h2 className="text-3xl font-bold text-indigo-600">
               <span className="ml-1 inline-flex">
                 <span className="animate-bounce [animation-delay:0ms]">.</span>
-                <span className="animate-bounce [animation-delay:150ms]">
-                  .
-                </span>
-                <span className="animate-bounce [animation-delay:300ms]">
-                  .
-                </span>
+                <span className="animate-bounce [animation-delay:150ms]">.</span>
+                <span className="animate-bounce [animation-delay:300ms]">.</span>
               </span>
             </h2>
           </div>

@@ -26,7 +26,7 @@ const LivroCard: React.FC<LivroCardProps> = ({ livro }) => {
   const melhorOferta = ofertasOrdenadas[0];
 
   return (
-    <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+    <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:scale-101 hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
       <div className="p-5 flex gap-4">
         {/* Capa do Livro */}
         <div className="w-24 h-36 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">

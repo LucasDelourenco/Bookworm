@@ -40,10 +40,6 @@ public class ConservadoraScraper implements LivrariaScraper{
 
             String titulo = produto.select(".name .product-name").text().toLowerCase();
 
-            if(Verificador.pesquisaEmTitulo(pesquisa, titulo)){
-                return null;
-            }
-
             String precoTexto = produto.select(".price .price-new").text()
                 .replace(" ", "")
                 .replace(",", ".");
@@ -62,6 +58,9 @@ public class ConservadoraScraper implements LivrariaScraper{
 
             String autor = produto.select(".author a").text();
 
+            if(!Verificador.pesquisaEmAlvo(pesquisa, titulo) && !Verificador.pesquisaEmAlvo(pesquisa, autor)){
+                return null;
+            }
 
             return new Livro(titulo, preco, "Livraria Conservadora", link, autor, imagem);
 

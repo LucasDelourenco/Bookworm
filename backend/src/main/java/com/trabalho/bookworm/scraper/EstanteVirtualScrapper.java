@@ -44,10 +44,6 @@ public class EstanteVirtualScrapper implements LivrariaScraper {
 
             String titulo = produto.select(".product-item__info .product-item__header h2").text().toLowerCase();
 
-            if(Verificador.pesquisaEmTitulo(pesquisa, titulo)){
-                return null;
-            }
-
             String precoTexto = produto.select(".product-item__info .product-item__buy-area .product-item__text .product-item__sale-price").text()
                 .replace("R$", "")
                 .replace(" ", "")
@@ -108,6 +104,10 @@ public class EstanteVirtualScrapper implements LivrariaScraper {
             //String imagem = produto.select(".product-item__cover img").attr("src");
 
             String autor = produto.select(".product-item__info .product-item__author").text();
+
+            if(!Verificador.pesquisaEmAlvo(pesquisa, titulo) && !Verificador.pesquisaEmAlvo(pesquisa, autor)){
+                return null;
+            }
 
             return new Livro(titulo, preco, "Livraria Estante Virtual", link, autor, imagem);
 

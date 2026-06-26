@@ -2,7 +2,6 @@ package com.trabalho.bookworm.model;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

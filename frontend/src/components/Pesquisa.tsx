@@ -6,14 +6,11 @@ import useLivroStore from "../store/LivroStore";
 const Pesquisa = () => {
   const setNome = useLivroStore((s) => s.setNome);
   const navigate = useNavigate();
-  
+
   const tratarPesquisa = (nome: string) => {
     setNome(nome);
-    let valor = "/" + nome
-    if(nome == ""){
-      valor="";
-    }
-    navigate("/search"+valor);
+    if (nome.trim() === "") navigate("/search");
+    else navigate("/search?q=" + encodeURIComponent(nome));
   };
 
   const debouncedFunction = _.debounce((nome: string) => {
@@ -27,16 +24,16 @@ const Pesquisa = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      debouncedFunction(event.currentTarget.value); // Isso garante que a função debounced seja executada imediatamente ao aperta enter
+      tratarPesquisa(event.currentTarget.value); // Isso garante que a função debounced seja executada imediatamente ao aperta enter
       // event.preventDefault();
       // navigate("/search");
     }
-  }
+  };
 
   return (
-    <div className="flex justify-center w-full my-8">
-      <div className="relative w-full max-w-2xl group">
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center">
+    <div className="my-8 flex w-full justify-center">
+      <div className="group relative w-full max-w-2xl">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-4">
           {/* o group-focus-within quando o usuário clica no input (que está dentro do elemento group), a cor da lupa muda para um tom de roxo/índigo.  */}
           <i className="bi bi-search text-gray-400 group-focus-within:text-indigo-500"></i>
         </div>
@@ -44,7 +41,7 @@ const Pesquisa = () => {
           //onChange={handleChange}
           onKeyDown={handleKeyDown}
           type="text"
-          className="w-full pl-12 pr-4 py-4 text-lg bg-white border border-gray-200 rounded-full shadow-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+          className="w-full rounded-full border border-gray-200 bg-white py-4 pr-4 pl-12 text-lg text-gray-800 placeholder-gray-400 shadow-sm transition-all focus:border-transparent focus:ring-2 focus:ring-indigo-500 focus:outline-none"
           placeholder="Qual livro você está procurando hoje?"
         />
       </div>

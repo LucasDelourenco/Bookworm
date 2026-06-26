@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trabalho.bookworm.dto.LivroDto;
-import com.trabalho.bookworm.model.Livro;
 import com.trabalho.bookworm.service.AgregadorLivrariasService;
 
 @RestController
@@ -21,7 +20,7 @@ public class LivroScraperController {
     private AgregadorLivrariasService agregadorLivrariaService;
     
     @GetMapping("/buscar")
-    public List<LivroDto> buscarEmTodasLivrarias(@RequestParam String titulo){
+    public List<LivroDto> buscarEmTodasLivrarias(@RequestParam("q") String titulo){
         return agregadorLivrariaService.buscarEmTodasLivrarias(titulo);
     }
 }

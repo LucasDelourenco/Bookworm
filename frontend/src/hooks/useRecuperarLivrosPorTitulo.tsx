@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { isUndefined } from "lodash";
 
 const recuperarLivroPorTitulo = async (livro: string) => {
-  //http://localhost:8080/api/livros/buscar?q=codigo%20limpo
+  //http://localhost:8080/livros/buscar?q=codigo%20limpo
   const response = await fetch(
-    "http://localhost:8080/api/livros/buscar?q=" + livro,
+    "http://localhost:8080/livros/buscar?q=" + livro,
   );
   if (!response.ok) {
     throw new Error(

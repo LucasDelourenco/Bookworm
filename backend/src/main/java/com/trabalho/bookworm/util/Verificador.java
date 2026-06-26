@@ -16,7 +16,8 @@ public class Verificador {
         String alvoTratado = removerAcentos(alvo).toLowerCase().strip();
         String pesquisaTratada = removerAcentos(pesquisa).toLowerCase().replace("%20", " ").strip();
         
-        for(String parte : pesquisaTratada.split(" ")){
+        for(String parte : pesquisaTratada.split(" +")){
+            //System.out.println(parte);
             if((alvoTratado.contains(parte))){
                 return true;
             }

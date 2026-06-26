@@ -86,7 +86,7 @@ const SearchPage = () => {
             )}
           </div>
         )}
-        {recuperandoProduto && !isUndefined(livro) && (
+        {recuperandoProduto && !isUndefined(livro) && termoBuscado!="" && (
           <div className="flex items-center justify-center py-10">
             <h2 className="text-3xl font-bold text-indigo-600">
               <span className="ml-1 inline-flex">

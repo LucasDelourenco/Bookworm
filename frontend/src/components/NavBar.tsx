@@ -1,13 +1,16 @@
 import { NavLink } from "react-router-dom";
 import bookworm from "../assets/bookworm.png";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
+import useLivroStore from "../store/LivroStore";
+import type { Livro } from "../interfaces/Livro";
 //import { useState } from "react";
 //import useLivroStore from "../store/LivroStore";
 //import type { Livro } from "../interfaces/Livro";
 
 const NavBar = () => {
   // const [isOpen, setIsOpen] = useState(false); // Descomente se for usar um menu mobile
-  // const setLivroSelecionado = useLivroStore((s) => s.setLivroSelecionado);
+  const setLivroSelecionado = useLivroStore((s) => s.setLivroSelecionado);
+  const setNome = useLivroStore((s) => s.setNome);
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -28,6 +31,10 @@ const NavBar = () => {
               Mais Buscados
             </NavLink>
             <NavLink 
+              onClick={() => {
+                setLivroSelecionado({} as Livro);
+                setNome("");
+              }}
               to="/search" 
               className={({ isActive }) => `font-medium transition-colors ${isActive ? 'text-indigo-600' : 'text-gray-500 hover:text-indigo-600'}`}
             >

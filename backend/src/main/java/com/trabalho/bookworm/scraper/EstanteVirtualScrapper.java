@@ -78,9 +78,9 @@ public class EstanteVirtualScrapper implements LivrariaScraper {
             //
             BigDecimal preco = new BigDecimal(precoTexto);
 
-            String link = produto.select(".product-item__link").attr("abs:href");
+            // String link = produto.select(".product-item__link").attr("abs:href");
 
-
+            String link = "";
             String imagem = "";
             Elements scripts = doc.select("script[type=application/ld+json]");
 
@@ -91,12 +91,16 @@ public class EstanteVirtualScrapper implements LivrariaScraper {
                 if (conteudo.contains("\"ItemList\"")) {
 
                     JsonNode root = new ObjectMapper().readTree(conteudo);
-                    JsonNode items = root.path("itemListElement");
+                    // JsonNode items = root.path("itemListElement");
 
-                    if (items.isArray() && items.size() > 0) {
-                        JsonNode firstItem = items.get(0).path("item");
-                        imagem = firstItem.path("image").asString();
-                    }
+                    // if (items.isArray() && items.size() > 0) {
+                    //     JsonNode firstItem = items.get(0).path("item");
+                    //     imagem = firstItem.path("image").asString();
+                    // }
+                    JsonNode firstItem = root.path("itemListElement").get(0).path("item");
+
+                    imagem = firstItem.path("image").asString();
+                    link   = firstItem.path("url").asString();
                     break; 
                 }
             }
@@ -108,6 +112,8 @@ public class EstanteVirtualScrapper implements LivrariaScraper {
             if(!Verificador.pesquisaEmAlvo(pesquisa, titulo) && !Verificador.pesquisaEmAlvo(pesquisa, autor)){
                 return null;
             }
+
+            System.out.println("LINK : " + link);
 
             return new Livro(titulo, preco, "Livraria Estante Virtual", link, autor, imagem);
 

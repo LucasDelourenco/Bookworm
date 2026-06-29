@@ -34,7 +34,7 @@ const MoreSearchPage = () => {
           <div className="flex items-center justify-center py-10">
             <h2 className="text-3xl font-bold text-indigo-600">
               Carregando o Top 10
-              <span className="ml-1 inline-flex"> {/* <-- Wrapper necessário aqui! */}
+              <span className="ml-1 inline-flex">
                 <span className="animate-bounce [animation-delay:0ms]">.</span>
                 <span className="animate-bounce [animation-delay:150ms]">.</span>
                 <span className="animate-bounce [animation-delay:300ms]">.</span>

@@ -50,7 +50,7 @@ public class TracaScraper implements LivrariaScraper {
 
             // Limpa caracteres e converte para double
             String precoTexto = ultimoPreco
-                .replaceAll("[^0-9,]", "")
+                .replaceAll("[^0-9,]", "") //tudo o que nao for "," ou numero é removido
                 .replace(" ", "")
                 .replace(",", ".");
             BigDecimal preco = new BigDecimal(precoTexto);

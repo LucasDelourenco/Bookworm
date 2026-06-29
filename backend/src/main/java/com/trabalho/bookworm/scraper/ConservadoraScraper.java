@@ -59,6 +59,7 @@ public class ConservadoraScraper implements LivrariaScraper{
             String autor = produto.select(".author a").text();
 
             if(!Verificador.pesquisaEmAlvo(pesquisa, titulo) && !Verificador.pesquisaEmAlvo(pesquisa, autor)){
+                System.out.println("Nada em Conservadora");
                 return null;
             }
 

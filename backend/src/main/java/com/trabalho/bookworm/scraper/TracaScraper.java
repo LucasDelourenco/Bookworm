@@ -69,6 +69,7 @@ public class TracaScraper implements LivrariaScraper {
             String autor = produto.select(".product-extra-info a").text();
 
             if(!Verificador.pesquisaEmAlvo(pesquisa, titulo) && !Verificador.pesquisaEmAlvo(pesquisa, autor)){
+                System.out.println("Nada em Traca");
                 return null;
             }
 

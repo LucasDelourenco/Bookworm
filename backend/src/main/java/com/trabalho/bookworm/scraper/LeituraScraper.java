@@ -38,6 +38,7 @@ public class LeituraScraper implements LivrariaScraper {
             String titulo = produto.select(".caption h4 a").text();
 
             if(!Verificador.pesquisaEmAlvo(pesquisa, titulo)){
+                System.out.println("Nada em Leitura");
                 return null;
             }
 

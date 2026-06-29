@@ -46,10 +46,13 @@ const LivroSeachCard = ( {livro}: Props ) => {
           </div>
           
           <div className="mt-3">
+            {livro.preco != 2147483647 && //2147483647 é o val Max de Int, usado para representar ausencia de preço
+            <>
             <p className="text-xs text-gray-400 uppercase font-semibold">Preço</p>
             <p className="text-2xl font-bold text-emerald-600">
               R$ {livro.preco.toFixed(2).replace('.', ',')}
             </p>
+            </>}
             <p className="text-xs text-gray-500">via {livro.loja}</p>
           </div>
         </div>

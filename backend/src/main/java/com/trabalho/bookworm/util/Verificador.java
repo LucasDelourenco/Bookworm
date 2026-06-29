@@ -12,14 +12,17 @@ public class Verificador {
         return DIACRITICOS.matcher(normalizado).replaceAll("");
     }
 
-    public static Boolean pesquisaEmTitulo(String pesquisa, String titulo){
-        String tituloTratado = removerAcentos(titulo).toLowerCase();
-        String pesquisaTratada = removerAcentos(pesquisa).toLowerCase().replace("%20", " ");
+    public static Boolean pesquisaEmAlvo(String pesquisa, String alvo){
+        String alvoTratado = removerAcentos(alvo).toLowerCase().strip();
+        String pesquisaTratada = removerAcentos(pesquisa).toLowerCase().replace("%20", " ").strip();
         
-        if(!(tituloTratado.contains(pesquisaTratada))){
-            System.out.println("Titulo differente: " + titulo + " - " + pesquisa);
-            return true;
+        for(String parte : pesquisaTratada.split(" +")){
+            //System.out.println(parte);
+            if((alvoTratado.contains(parte))){
+                return true;
+            }
         }
+        System.out.println("alvo differente: " + alvo + " - " + pesquisa);
         return false;
     } 
 }

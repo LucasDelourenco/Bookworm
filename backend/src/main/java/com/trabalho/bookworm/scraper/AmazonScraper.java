@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.trabalho.bookworm.model.Livro;
 import com.trabalho.bookworm.util.Constantes;
+import com.trabalho.bookworm.util.Verificador;
 
 @Component
 public class AmazonScraper implements LivrariaScraper{
@@ -79,6 +80,10 @@ public class AmazonScraper implements LivrariaScraper{
 
                 // Limpa os espaços em branco
                 autor = autor.trim(); 
+            }
+
+            if(!Verificador.pesquisaEmAlvo(pesquisa, titulo) && !Verificador.pesquisaEmAlvo(pesquisa, autor)){
+                return null;
             }
 
             return new Livro(titulo, preco, "Amazon", link, autor, imagem);

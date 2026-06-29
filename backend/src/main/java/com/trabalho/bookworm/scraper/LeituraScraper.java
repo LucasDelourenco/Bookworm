@@ -37,7 +37,7 @@ public class LeituraScraper implements LivrariaScraper {
 
             String titulo = produto.select(".caption h4 a").text();
 
-            if(Verificador.pesquisaEmTitulo(pesquisa, titulo)){
+            if(!Verificador.pesquisaEmAlvo(pesquisa, titulo)){
                 return null;
             }
 
@@ -46,7 +46,10 @@ public class LeituraScraper implements LivrariaScraper {
                 .replace(" ", "")
                 .replace(",", ".");
 
-            BigDecimal preco = new BigDecimal(precoTexto);
+            BigDecimal preco = new BigDecimal(Integer.MAX_VALUE);
+            if(precoTexto != ""){
+                preco = new BigDecimal(precoTexto);
+            }
 
             String link = produto.select(".image a").attr("href");
 

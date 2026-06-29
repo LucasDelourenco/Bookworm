@@ -41,10 +41,6 @@ public class TracaScraper implements LivrariaScraper {
 
             String titulo = produto.selectFirst(".card__heading a").text().toLowerCase();
 
-            if(Verificador.pesquisaEmTitulo(pesquisa, titulo)){
-                return null;
-            }
-
             String textoPrecoBruto = produto.select(".price").text();
 
             // Divide a string no R$ 
@@ -71,6 +67,10 @@ public class TracaScraper implements LivrariaScraper {
             }
 
             String autor = produto.select(".product-extra-info a").text();
+
+            if(!Verificador.pesquisaEmAlvo(pesquisa, titulo) && !Verificador.pesquisaEmAlvo(pesquisa, autor)){
+                return null;
+            }
 
             return new Livro(titulo, preco, "Livraria Traça", link, autor, imagem);
 

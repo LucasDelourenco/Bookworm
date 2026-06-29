@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import useRecuperarMaisBuscados from "../hooks/useRecuperarMaisBuscados";
+import useLivroStore from "../store/LivroStore";
 
 const MoreSearchPage = () => {
   const { data: livrosPopulares, isPending, error } = useRecuperarMaisBuscados();
   const navigate = useNavigate();
+  const setNome = useLivroStore((s) => s.setNome);
 
   if (error) {
     return <div className="mt-10 text-center text-red-500">Erro ao carregar o ranking.</div>;
@@ -11,6 +13,7 @@ const MoreSearchPage = () => {
 
   // Joga pra pesquisa com o livro escolhido
   const handleSearch = (titulo: string) => {
+    setNome(titulo)
     navigate(`/search?q=${encodeURIComponent(titulo)}`);
   };
 

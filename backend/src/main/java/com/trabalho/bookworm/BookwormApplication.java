@@ -38,7 +38,7 @@ public class BookwormApplication {
         // System.out.println(livro);
 
         // TracaScraper tc = new TracaScraper();
-        // Livro livro = tc.buscarLivro("sexo");
+        // Livro livro = tc.buscarLivro("vidas secas");
 
         // AmazonScraper ac = new AmazonScraper();
         // Livro livro = ac.buscarLivro("ela");

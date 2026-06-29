@@ -14,4 +14,6 @@ public class Constantes {
     public static final String AMAZON_PREFIXO_URL = "https://www.amazon.com.br/s?k=";
     public static final String AMAZON_SUFIXO_URL = "&i=stripbooks";
 
+    public static final String RANKING_URL = "https://www.publishnews.com.br/ranking-nielsen/";
+
 }

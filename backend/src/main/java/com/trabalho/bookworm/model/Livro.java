@@ -19,11 +19,11 @@ public class Livro {
     private String loja;
     private String link;
     
-    public Livro(String titulo, BigDecimal preco, String loja, String link, String autor, String imagem) {
+    public Livro(String titulo, BigDecimal zero, String loja, String link, String autor, String imagem) {
         this.imagem = imagem;
         this.autor = autor;
         this.titulo = titulo;
-        this.preco = preco;
+        this.preco = zero;
         this.loja = loja;
         this.link = link;
     }

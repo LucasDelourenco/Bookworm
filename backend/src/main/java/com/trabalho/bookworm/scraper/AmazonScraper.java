@@ -83,6 +83,7 @@ public class AmazonScraper implements LivrariaScraper{
             }
 
             if(!Verificador.pesquisaEmAlvo(pesquisa, titulo) && !Verificador.pesquisaEmAlvo(pesquisa, autor)){
+                System.out.println("Nada em Amazon");
                 return null;
             }
 

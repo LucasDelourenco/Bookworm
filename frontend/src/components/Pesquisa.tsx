@@ -13,9 +13,9 @@ const Pesquisa = () => {
     else navigate("/search?q=" + encodeURIComponent(nome));
   };
 
-  const debouncedFunction = _.debounce((nome: string) => {
-    tratarPesquisa(nome);
-  }, 1500);
+  // const debouncedFunction = _.debounce((nome: string) => {
+  //   tratarPesquisa(nome);
+  // }, 1500);
 
   // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   debouncedFunction(event.target.value);

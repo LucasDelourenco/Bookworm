@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import useRecuperarMaisBuscados from "../hooks/useRecuperarMaisBuscados";
+import useLivroStore from "../store/LivroStore";
 
 const MoreSearchPage = () => {
   const { data: livrosPopulares, isPending, error } = useRecuperarMaisBuscados();
   const navigate = useNavigate();
+  const setNome = useLivroStore((s) => s.setNome);
 
   if (error) {
     return <div className="mt-10 text-center text-red-500">Erro ao carregar o ranking.</div>;
@@ -11,6 +13,7 @@ const MoreSearchPage = () => {
 
   // Joga pra pesquisa com o livro escolhido
   const handleSearch = (titulo: string) => {
+    setNome(titulo)
     navigate(`/search?q=${encodeURIComponent(titulo)}`);
   };
 
@@ -31,7 +34,7 @@ const MoreSearchPage = () => {
           <div className="flex items-center justify-center py-10">
             <h2 className="text-3xl font-bold text-indigo-600">
               Carregando o Top 10
-              <span className="ml-1 inline-flex"> {/* <-- Wrapper necessário aqui! */}
+              <span className="ml-1 inline-flex">
                 <span className="animate-bounce [animation-delay:0ms]">.</span>
                 <span className="animate-bounce [animation-delay:150ms]">.</span>
                 <span className="animate-bounce [animation-delay:300ms]">.</span>

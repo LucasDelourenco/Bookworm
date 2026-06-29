@@ -49,7 +49,6 @@ public class MaisBuscadosScraper {
 
 
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println("deu ruim");
             e.printStackTrace();
             return null;

@@ -24,6 +24,7 @@ public class AgregadorLivrariasService {
         for(LivrariaScraper scraper : scrapers){
             livros.add(scraper.buscarLivro(titulo));
         }
+
         BigDecimal menorPreco = new BigDecimal(-1);
         List<LivroDto> livrosDto = new ArrayList<>();
         for(Livro livro : livros){
@@ -31,9 +32,11 @@ public class AgregadorLivrariasService {
                 //System.out.println("Nao Achei");
                 continue;
             };
+
             if(menorPreco.compareTo(new BigDecimal(0))<0 || livro.getPreco().compareTo(menorPreco) < 0){
                 menorPreco = livro.getPreco();
             }
+            
             livrosDto.add(new LivroDto(livro.getTitulo(), livro.getPreco(), livro.getLoja()
                             , livro.getLink(), livro.getAutor(), livro.getImagem(), false));
         }

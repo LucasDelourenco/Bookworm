@@ -1,5 +1,4 @@
 // src/components/LivroCard.tsx
-import React from 'react';
 import type { Livro } from '../interfaces/Livro';
 
 

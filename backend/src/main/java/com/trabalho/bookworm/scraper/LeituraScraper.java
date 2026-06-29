@@ -1,6 +1,8 @@
 package com.trabalho.bookworm.scraper;
 
 import java.math.BigDecimal;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,16 +20,16 @@ public class LeituraScraper implements LivrariaScraper {
 
         try {
 
-            String pesquisaTratada = pesquisa.replace(" ","%20");
-            //pesquisa = URLEncoder.encode(pesquisa, StandardCharsets.UTF_8); //para formatar acentos também
+            //String pesquisaTratada = pesquisa.replace(" ","%20");
+            String pesquisaTratada = URLEncoder.encode(pesquisa, StandardCharsets.UTF_8); //para formatar acentos também
 
             String url = Constantes.LEITURA_URL + pesquisaTratada;
 
             Document doc = Jsoup.connect(url)
-                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
-                .header("Accept-Language", "pt-BR,pt;q=0.9")
-                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                .get();
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36") //Informar o agente de navegador ajuda a acessar sites que bloqueiam requisições automaticas de bots
+                .header("Accept-Language", "pt-BR,pt;q=0.9") //pegar a pagina em portugues
+                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8") //"quero receber em html"
+                .get(); //pega o html da pagina
 
             Element produto = doc.selectFirst(".product-thumb");
 
@@ -38,6 +40,7 @@ public class LeituraScraper implements LivrariaScraper {
             String titulo = produto.select(".caption h4 a").text();
 
             if(!Verificador.pesquisaEmAlvo(pesquisa, titulo)){
+                System.out.println("Nada em Leitura");
                 return null;
             }
 

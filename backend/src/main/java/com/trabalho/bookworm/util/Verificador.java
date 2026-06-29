@@ -14,9 +14,11 @@ public class Verificador {
 
     public static Boolean pesquisaEmAlvo(String pesquisa, String alvo){
         String alvoTratado = removerAcentos(alvo).toLowerCase().strip();
-        String pesquisaTratada = removerAcentos(pesquisa).toLowerCase().replace("%20", " ").strip();
+        String pesquisaTratada = removerAcentos(pesquisa).toLowerCase()
+                .replace("%20", " ")
+                .replace("+"," ").strip();
         
-        for(String parte : pesquisaTratada.split(" +")){
+        for(String parte : pesquisaTratada.split(" ")){
             //System.out.println(parte);
             if((alvoTratado.contains(parte))){
                 return true;

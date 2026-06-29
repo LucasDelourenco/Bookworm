@@ -8,6 +8,7 @@ import com.trabalho.bookworm.scraper.AmazonScraper;
 import com.trabalho.bookworm.scraper.ConservadoraScraper;
 import com.trabalho.bookworm.scraper.EstanteVirtualScrapper;
 import com.trabalho.bookworm.scraper.LeituraScraper;
+import com.trabalho.bookworm.scraper.MaisBuscadosScraper;
 import com.trabalho.bookworm.scraper.TracaScraper;
 
 import java.io.IOException;
@@ -39,10 +40,14 @@ public class BookwormApplication {
         // TracaScraper tc = new TracaScraper();
         // Livro livro = tc.buscarLivro("sexo");
 
-        AmazonScraper ac = new AmazonScraper();
-        Livro livro = ac.buscarLivro("ela");
-        System.out.println(livro);
+        // AmazonScraper ac = new AmazonScraper();
+        // Livro livro = ac.buscarLivro("ela");
+        // System.out.println(livro);
+
+        // MaisBuscadosScraper maisBuscadosScraper = new MaisBuscadosScraper();
+        // System.out.println(maisBuscadosScraper.maisBuscados());
         
         SpringApplication.run(BookwormApplication.class, args);
+
     }
 }

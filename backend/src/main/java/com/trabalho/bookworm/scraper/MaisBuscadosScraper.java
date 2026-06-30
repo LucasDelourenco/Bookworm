@@ -25,7 +25,7 @@ public class MaisBuscadosScraper {
         try {
             String url = Constantes.RANKING_URL;
             
-            System.out.println(url);
+            //System.out.println(url);
 
             Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")

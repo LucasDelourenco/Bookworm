@@ -7,11 +7,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.lang.model.util.Elements;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 import com.trabalho.bookworm.model.Livro;
@@ -31,11 +30,11 @@ public class MaisBuscadosScraper {
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
                 .header("Accept-Language", "pt-BR,pt;q=0.9")
                 .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                .timeout(10000)
+                .timeout(100000)
                 .get();
 
             // Element rankingElement = doc.selectFirst(".pn-ranking-livros-corpo clearfix");
-            org.jsoup.select.Elements nomesDosLivros = doc.select(".pn-ranking-livro-nome");// pega todos os livros do ranking
+            Elements nomesDosLivros = doc.select(".pn-ranking-livro-nome");// pega todos os livros do ranking
             List<String> livros = new ArrayList<>();
 
             // corta a lista pro top10
